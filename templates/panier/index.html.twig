@@ -1,0 +1,85 @@
+     {% extends 'base.html.twig' %}
+
+
+
+   {% block content %}
+
+
+
+            <div class="container">
+
+                <h3>Mon panier</h3>
+                Retrouvez l'ensemble des outils que vous avez ajouté à votre panier.
+                <hr/>
+
+                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                        
+                                                        <th scope="col">Produit</th>
+                                                        <th scope="col">Description</th>
+                                                        <th scope="col">Quantite</th>
+                                                        <th scope="col">Prix</th>
+                                                        <th scope="col">total</th>
+                                                        <th scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                 
+                                                        
+                                                        <tr>
+
+                                                                                                    <th>
+                                                                                                        <img src="images/business.jpg" alt="" height="75px"><br/>
+                                                                                                    </th>
+
+
+                                                                                                <td>
+                                                                                                        rzgrgregergergergreg<br/>
+                                                                                                        <small>regregregregregregregergregreg</small> 
+                                                                                                </td> 
+
+                                                                                <td>
+                                                                                   
+                                                                                   1
+                                                                                  
+                                                                                </td>
+                                                                                                
+
+                                                                                                <td>2344</td>
+                                                                                                <td>234 €</td>
+                                                                                               
+                                                                                                
+                                                                                                <td>                                   
+                                                                                                <a href="#">
+                                                                                                <img src="images/poubelle.png" height="20px" alt="supprimer mon produt">
+                                                                                                </a>
+                                                                                                </td>
+                                                    
+                                                        </tr>                                      
+
+                                                  
+
+                                                    
+
+                                                    </tbody>
+                    </table>
+
+                  
+
+                    <div class="bloc_1">
+                                <div class="bloc_2">
+                                <b>Nombre de produit :</b> 2<br/>
+                                <b>Total de mon panier :</b> 123 €
+                                </div>
+
+                                <div class="bloc_3 mt-3" >
+                                <a href="{{path('recapitulatif_panier')}}" class="btn btn-success btn-block mt-1" style="width: 100%" >Valider mon panier</a>
+                                </div>
+                    </div>
+           
+            </div>
+     
+
+
+             {% endblock %}
