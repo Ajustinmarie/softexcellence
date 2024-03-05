@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte - La boutique de softexcellence{% endblock %}
+
+{% block content %}
+
+            <div class="container">
+
+                    <h3>Mon Compte</h3>
+
+                    Bienvenue {{(app.user.prenom)}} dans votre compte. <br/>
+                    C'est dans cet espace que vous allez pouvoir gérer toutes vos informations personnelles.
+                   <hr/>
+                   <a href="{{path('app_pass_modification')}}"> - Modifier mon mot de passe</a><br/>
+                   <a href="#>">- Mes commandes</a>
+
+            </div>
+
+{% endblock %}
