@@ -1,83 +1,66 @@
-{% extends 'base.html.twig.html' %}
+{% extends 'base.html.twig' %}
+    
+           {% block content %}
 
- {% block content  %}
+            <div class="container">
 
- <style>
-#section_1
-{
-     padding-bottom: 20px;
-     padding-top: 59px;
-}
-#bl
-{
-    margin-top: 60px;
-}
+     {% if app.session.get('email') %}
 
-.card-img-top
-{
-  width:402px;
-}
- </style>
-
-<div id="bl">
+     <h3>Bienvenue {{app.session.get('prenom') | capitalize }}</h3>
 
 
-<h3>Bienvenue Justin</h3><br/>
-  <h6><a href="#">Voir mes outils (2)</a></h6>
-             
-               
-                <div class="row row-cols-1 row-cols-md-3 g-4">                   
-                   
-                    <div class="col">
-                      <div class="card h-100" style="width: 402px;">
-                        <img src="{{asset('assets/images/business.jpg')}}" class="card-img-top"  alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        
-                        </div>
-                        <div class="card-footer">
-                            <a href="outils_vba_detail.html" class="btn btn-primary">Voir description</a>
-                          <small class="text-body-secondary">Téléchargement gratuit</small>
-                       
-                        </div>
-                      </div>
-                      
-                     
-                    </div>
-                    <div class="col">
-                      <div class="card h-100" style="width: 402px;">
-                      
-                        <img src="{{asset('assets/images/business.jpg')}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        
-                        </div>
-                        <div class="card-footer">
-                            <a href="outils_vba_detail.html" class="btn btn-primary">Voir description</a>
-                          <small class="text-body-secondary">13,99 Euros</small>
-                        </div>
-                      </div>
-                    </div>
+      {% if produit_vba_user_liste is not empty %}
 
-                    <div class="col">
-                      <div class="card h-100" style="width: 402px;">
-                        <img src="{{asset('assets/images/business.jpg')}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        
-                        </div>
-                        <div class="card-footer">
-                          <a href="outils_vba_detail.html" class="btn btn-primary">Voir description</a>
-                          <small class="text-body-secondary">13,99 Euros</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+     {% set nombre_outils = produit_vba_user_liste|length %}
 
-<div>
+      <h6><a href="{{path('voir_outil_vba_user')}}">Voir mes outils ({{ nombre_outils }})</a></h6><br/>
+
+      {% endif %}
+   
+    {% endif %} 
+            
 
 
-  {% endblock %}
+
+    <span style="margin:auto"> {{notification}}</span>
+
+  
+             <div class="row row-cols- row-cols-md-3 g-4" style="margin-right:20px">         
+
+                        {% for produit_vba in produit_vba %}  
+
+                                                <div class="card h-100" style="width: 361.818182px; margin-right:20px;" style="height:336px">
+                                                  
+                                                              <img src="{{ asset('uploads/' ~ produit_vba.image) }}" style="height:336px" class="card-img-top"  alt="...">
+                                                          
+                                                              <!--   <img src="{{ asset('assets/images/business.jpg') }}" class="card-img-top" alt="..."> -->
+
+                                                                         <div class="card-body">
+                                                                                  <h5 class="card-title">{{ produit_vba.nomoutil | capitalize }}</h5>
+                                                                                  <p class="card-text">{{ produit_vba.description | slice(0, 100) ~ '...' }}</p>                    
+                                                                         </div>
+
+                                                                          <div class="card-footer">
+                                                                                  <a href=" {{path('outils_qhse_vba_detail',{'id':produit_vba.id})}}" class="btn btn-primary">Voir détails</a>
+                                                                                  <small class="text-body-secondary">
+                                                                                  {% if produit_vba.Prix == 0 %}                                                                                          
+                                                                                  Téléchargement gratuit                                                                                          
+                                                                                  {% else %}                                                                                          
+                                                                                      {{ produit_vba.Prix }}€ 
+                                                                                      {% endif %}                                                                                          
+                                                                                      </small> 
+                                                                          </div>
+                                               </div> 
+
+                                                        
+                           
+                            
+
+                     {% endfor %}
+
+           </div>
+
+
+
+
+{% endblock %}

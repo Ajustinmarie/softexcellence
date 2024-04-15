@@ -1,19 +1,57 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Mon Compte - La boutique de softexcellence{% endblock %}
 
 {% block content %}
 
             <div class="container">
+             
+ <!--               
+   {% if app.session.has('email') %}
+    {{ app.session.get('prenom') }}
+{% else %}
+    La variable de session 'ma_variable' n'existe pas.
+{% endif %}
+-->
+      {% if app.session.has('email') %}
 
-                    <h3>Mon Compte</h3>
 
-                    Bienvenue {{(app.user.prenom)}} dans votre compte. <br/>
-                    C'est dans cet espace que vous allez pouvoir gérer toutes vos informations personnelles.
-                   <hr/>
-                   <a href="{{path('app_pass_modification')}}"> - Modifier mon mot de passe</a><br/>
-                   <a href="#>">- Mes commandes</a>
+                              <h3>Mon Compte                             
+                              {% if app.session.get('situation')=='ADMIN' %}
+                              (Admin)
+                              {% endif %}
+                              
+                              </h3>
 
+                                      Bienvenue  <b>{{ app.session.get('prenom') | capitalize }}</b> dans votre compte. <br/>
+                                      C'est dans cet espace que vous allez pouvoir gérer toutes vos informations personnelles.
+                                    <hr/>
+                                    
+                                    {% if app.session.get('situation')=='ADMIN' %}
+                                    <a href="{{path('insertion_outils_qhse_vba')}}"> - Inserer un outil vba</a><br/>
+                                    <a href=""> - Inserer une solution web</a><br/>
+                                     {% endif %}
+
+
+                                    <a href="{{path('app_pass_modification')}}"> - Modifier mon mot de passe</a><br/>
+                                    <a href="{{path('voir_outil_vba_user')}}">- Mes commandes</a>
+
+
+     {% else %}
+
+
+           <script>
+            window.location.href = "{{ path('espace_login_nouveau') }}";
+        </script>
+
+
+      
+    {% endif %}
+
+
+
+               
             </div>
 
 {% endblock %}

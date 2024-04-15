@@ -39,6 +39,9 @@ class InscriptionController extends AbstractController
                 if($form->isSubmitted() and $form->isValid())
                 {
                     $email=$form->get('email')->getData();
+                    $prenom=$form->get('prenom')->getData();
+                    $token_user=$form->get('TokenUser')->getData();
+
                     $verif_email=$this->entityManager->getRepository(User::class)->findByemail($email);
 
                     if(empty($verif_email))
@@ -49,13 +52,31 @@ class InscriptionController extends AbstractController
                         $user->setPassword($user_crypt_password);         
                         $this->entityManager->persist($user);
                         $this->entityManager->flush();
-                        $notification='Le compte à bien été crée';                                
+                        $notification='Le compte à bien été crée';     
+                        
+                        $url="127.0.0.1:8000/validation/compte/connexion/$token_user";
+                     //   $lien_crypte = md5($url);
+                        
+                        $destinataire = "destinataire@example.com";
+                        $sujet = "Mail d'activation softexcellence";
+                        $message = "Bonjour $prenom <br/> Veuillez cliquer sur le lien d'activation pour activer vôtre compte <a href='$url'>activation</a>.";
+                        $message .= "<br/><br/>Cordialement,<br/>Votre Nom";
+
+                        $headers = "From: no-reply@softexcellence.com\r\n";
+                        $headers .= "Reply-To: no-reply@softexcellence.com\r\n";
+                        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+                        // Envoi de l'e-mail
+                        mail($destinataire, $sujet, $message, $headers);   
+
+                        $notification='Nous avons pris en compte votre inscription. Vous allez recevoir un e-mail d\'activation.';
 
                     };
                 }
 
                 return $this->render('inscription/index.html.twig', [
-                    'form'=>$form->createView()
+                    'form'=>$form->createView(),
+                    'notification'=>$notification
                 ]);
             }
 }

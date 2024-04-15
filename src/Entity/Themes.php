@@ -29,6 +29,11 @@ class Themes
      */
     private $outilVbas;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=OutilWeb::class, inversedBy="themes")
+     */
+    private $outilWeb;
+
     public function __construct()
     {
         $this->outilVbas = new ArrayCollection();
@@ -49,6 +54,12 @@ class Themes
         $this->nom = $nom;
 
         return $this;
+    }
+
+
+    public function __toString()
+    {
+        return $this->getNom();
     }
 
     /**
@@ -77,6 +88,18 @@ class Themes
                 $outilVba->setThemes(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOutilWeb(): ?OutilWeb
+    {
+        return $this->outilWeb;
+    }
+
+    public function setOutilWeb(?OutilWeb $outilWeb): self
+    {
+        $this->outilWeb = $outilWeb;
 
         return $this;
     }

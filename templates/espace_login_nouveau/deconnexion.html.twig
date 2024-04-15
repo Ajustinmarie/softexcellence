@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EspaceLoginNouveauController!{% endblock %}
+
+{% block content %}
+      {{ app.session.get('prenom') }}
+
+                    <div class="container">
+                             
+                             <div class="alert alert-success" role="alert">
+                             Vous êtes maintenant deconnecté
+                             </div>
+
+                    </div>
+
+{% endblock %}

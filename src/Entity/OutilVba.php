@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+
 use App\Repository\OutilVbaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass=OutilVbaRepository::class)
@@ -22,9 +25,9 @@ class OutilVba
      */
     private $nom_outil;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+  /**
+ * @ORM\Column(type="text")
+ */
 
     private $Description;
 
@@ -75,6 +78,12 @@ class OutilVba
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->nom_outil;
+    }
+
 
     public function getDescription(): ?string
     {
@@ -139,7 +148,7 @@ class OutilVba
     public function getPiecesJointes(): ?string
     {
         return $this->pieces_jointes;
-    }
+    } 
 
     public function setPiecesJointes(string $pieces_jointes): self
     {

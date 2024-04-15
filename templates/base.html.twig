@@ -1,14 +1,16 @@
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
 
-        <meta name="description" content="">
-        <meta name="author" content="">
+       <meta name="description" content="Votre partenaire de confiance dans le développement d'outils web et VBA, spécialisé dans l'automatisation de processus et l'optimisation des opérations. Nous offrons des solutions sur mesure pour répondre à vos besoins en matière de développement logiciel, d'analyse de données et d'intégration de bases de données. Avec une solide expertise dans les normes ISO 9001, ISO 45001 et ISO 14001, nous vous accompagnons dans la digitalisation de vos systèmes de management de la qualité, de la santé et sécurité au travail">
+       <meta name="keywords" content="Développement web, Outils web, VBA, Programmation web, Développement d'applications web, Automatisation de processus, Microsoft Excel VBA, Solutions personnalisées, Intégration de bases de données, Développement sur mesure, Macros Excel, Applications métier, Optimisation des processus, Développement logiciel, Analyse et optimisation de données, Interface utilisateur conviviale, Expertise technique, Support technique, Solutions innovantes, Consultation en développement web, ISO 9001, ISO 14001, ISO 45001">
 
-        <title>Topic Listing Bootstrap 5 Template</title>
+
+     <title>Softexcellence - Developpement d'outils qualité sécurité environnement sur mesure</title>
 
         <!-- CSS FILES -->        
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,10 +58,12 @@ https://templatemo.com/tm-590-topic-listing
                         <i class="bi-back"></i>
                         <span>Softexcellence</span>
                     </a>
-
+                    
+                    <!--
                     <div class="d-lg-none ms-auto me-4">
                         <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
                     </div>
+                    -->
     
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -68,26 +72,40 @@ https://templatemo.com/tm-590-topic-listing
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-lg-5 me-lg-auto">
                             <li class="nav-item">
-                                  <a class="nav-link" href="{{path('accueil_page')}}">Accueil</a>
+                                  <a class="nav-link" href="{{path('accueil_page')}}"> Accueil</a>
                             </li>
-
-
-                          <li class="nav-item">
-                            <a class="nav-link" href="{{path('outils_qhse_vba')}}">NOS OUTILS VBA</a>
-                        </li>
-
-                        <li class="nav-item">
-                             <a class="nav-link" href="{{path('outils_qhse_web')}}">NOS SOLUTIONS  WEB</a>
-                        </li>
                          
-                         {% if app.user %}
+
+                
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{path('outils_qhse_vba')}}">OUTILS VBA</a>
+                                    </li>
+
+                  
+                       
+
+             
+
+
+           
+
+                                    <li class="nav-item">
+                                    <a class="nav-link" href="{{path('outils_qhse_web')}}">SOLUTIONS WEB</a>
+                                     </li>
+
+              
+
+                     
+                         
+                         {% if app.session.get('email') %}
 
                                <li class="nav-item">
-                                  <a class="nav-link" href="{{path('login')}}">MON COMPTE</a>
+                                  <a class="nav-link" href="{{path('app_mon_compte')}}">MON COMPTE</a>
                             </li> 
 
                                 <li class="nav-item">
-                                  <a class="nav-link" href="{{path('logout')}}">DECONNEXION</a>
+                                  <a class="nav-link" href="{{path('deconnexion')}}">DECONNEXION</a>
                             </li> 
 
                               
@@ -100,7 +118,7 @@ https://templatemo.com/tm-590-topic-listing
                          </li>
 
                            <li class="nav-item">
-                                  <a class="nav-link" href="{{path('login')}}">SE CONNECTER</a>
+                                  <a class="nav-link" href="{{path('espace_login_nouveau')}}">SE CONNECTER</a>
                             </li>  
 
 
@@ -115,12 +133,14 @@ https://templatemo.com/tm-590-topic-listing
 
                             <li class="nav-item dropdown">
                               <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a> --> 
-
+                            
+                            <!--
                                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                                     <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
 
                                     <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
                                 </ul>
+                            -->
                             </li>
                         </ul>
                         
@@ -200,17 +220,18 @@ https://templatemo.com/tm-590-topic-listing
                     </div>
            -->
                     <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
-                        <h6 class="site-footer-title mb-3">Information</h6>
+                        <h6 class="site-footer-title mb-3">Contact</h6>
 
                         <p class="text-white d-flex mb-1">
-                            <a href="tel: 305-240-9671" class="site-footer-link">
-                                06 66 99 30 63
+                        <!--    <a href="tel: 305-240-9671" class="site-footer-link">
+                                Tel: 06 66 99 30 63
                             </a>
+                        -->
                         </p>
 
                         <p class="text-white d-flex">
                             <a href="mailto:info@company.com" class="site-footer-link">
-                                contact@softexcellence.com
+                                Mail: contact@softexcellence.com
                             </a>
                         </p>
                     </div>
@@ -219,8 +240,7 @@ https://templatemo.com/tm-590-topic-listing
                     <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
                         <div class="dropdown">
                         <!--   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">     --> 
-                            <button class="btn btn-secondary dropdown-toggle" type="button"  aria-expanded="false">
-                            Francais</button>
+                            <a href="{{path('mention_legales')}}">Mention Legales</a>
 
                             <ul class="dropdown-menu">
                                 <li><button class="dropdown-item" type="button">Thai</button></li>
@@ -232,7 +252,7 @@ https://templatemo.com/tm-590-topic-listing
                         </div>
                     
 
-                        <p class="copyright-text mt-lg-5 mt-4">Copyright © 2023 Topic Listing Center. All rights reserved.
+                        <p class="copyright-text mt-lg-5 mt-4">Copyright © 2023 Softexcellence. Tous les droits réservés.
                        <!-- <br><br>Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a></p>  -->
                         
                     </div>

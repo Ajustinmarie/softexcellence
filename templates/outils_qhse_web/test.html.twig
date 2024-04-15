@@ -3,39 +3,55 @@
  {% block content %}
                             <div class="container">
 
+                                     
+
                                         <div class="row">
 
-                                                    <div class="col-md-6 my-auto">
-                                                                <div class="col-md-12">
-                                                                <h3>zfefzefe</h3>
-                                                                <small><b>Thème:rezgerger</b></small>
-                                                                <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
-                                                                <a href="panier.html" class="btn btn-primary">Demander une période d'essais</a>
-                                                                </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                                <img src="{{asset('assets/images/business.jpg')}}" class="card-img-top" alt="...">
-                                                    </div>
-
-                                        </div>
-
-
-                                            <div class="row mt-5">
+                                           <span style="text-align:center"> {{notification}} </span>
+                                                    
+                                       
+                                        {% for liste_outil_web in liste_outil_web %}   
 
                                                     <div class="col-md-6 my-auto">
                                                                 <div class="col-md-12">
-                                                                <h3>zfefzefe</h3>
-                                                                <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
-                                                                <a href="panier.html" class="btn btn-primary">Demander une période d'essais</a>
+
+                                                              
+
+                                                                <h3>{{ liste_outil_web.nom }} </h3>
+                                                                <small><b>Thème: {{ liste_outil_web.thematique}}</b></small>
+                                                                <p>{{ liste_outil_web.descriptif }} </p>
+                                                              
+                                                              
+                                                                {% if app.session.has('email') %}
+                                                      
+                                                                        <a href="{{ path('outils_qhse_web_periode_essais', {'id': liste_outil_web.id}) }}" class="btn btn-primary">Demander une période d'essais</a>
+
+                                                                {% else %}
+
+                                                                         <a href="{{ path('espace_login_nouveau') }}" class="btn btn-success" >Demander une période d'essais</a>
+                                                         
+                                                                 {% endif %}
+
+
                                                                 </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
-                                                                <img src="{{asset('assets/images/business.jpg')}}" class="card-img-top" alt="...">
+                                                    <div class="col-md-6" style="margin-top:20px">
+                                                   
+                                                   
+                                                           <video width="640" height="360" controls>
+                                                                <source src="/uploads/{{ liste_outil_web.LienVideo }}" type="video/mp4">
+                                                                Your browser does not support the video tag.
+                                                                </video>
+
                                                     </div>
 
-                                            </div>
+                                                     </div>
+
+
+                                       {% endfor %}   
+
+
                         
                             </div>
       {% endblock %}

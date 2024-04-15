@@ -15,4 +15,13 @@ class AccueilPageController extends AbstractController
     {
         return $this->render('accueil_page/index.html.twig');
     }
+
+
+     /**
+     * @Route("/mention/legales", name="mention_legales")
+     */
+    public function legales(): Response
+    {
+        return $this->render('accueil_page/mentions_legales.html.twig');
+    }
 }

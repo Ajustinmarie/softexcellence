@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,8 +19,10 @@ class InscrpitonFormulaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-           
+        // Générer une valeur aléatoire cryptée
+        $valeurAleatoire = md5(uniqid(rand(), true));
+
+        $builder           
 
             ->add('nom', TextType::class,[
                 'label'=>'Votre nom',
@@ -30,8 +33,7 @@ class InscrpitonFormulaireType extends AbstractType
                 'attr'=>[
                     'placeholder' =>'Merci de saisir votre nom'
                 ]
-            ] )
-
+            ])
 
             ->add('prenom', TextType::class,[
                 'label'=>'Votre prenom',
@@ -42,8 +44,7 @@ class InscrpitonFormulaireType extends AbstractType
                 'attr'=>[
                     'placeholder' =>'Merci de saisir votre prenom'
                 ]
-            ] )
-
+            ])
 
             ->add('email', EmailType::class,[
                 'label'=>'Votre email',
@@ -54,11 +55,8 @@ class InscrpitonFormulaireType extends AbstractType
                 'attr'=>[
                     'placeholder' =>'Merci de saisir votre adresse email'
                 ]
-            ] )
-           
+            ] )           
            // ->add('roles')
-          
-
 
             ->add('password', RepeatedType::class,[
                 'type'=>PasswordType::class,
@@ -79,8 +77,6 @@ class InscrpitonFormulaireType extends AbstractType
                 ]
     
                 ])
-
-
            
                 ->add('numero',TextType::class,[
                     'label'=>'Numero',
@@ -108,34 +104,31 @@ class InscrpitonFormulaireType extends AbstractType
                 ] )
 
 
-
-        
-    
+                ->add('TokenUser',HiddenType::class,[
+                    'data'=> $valeurAleatoire               
+                ] )
 
            
-           
-          
-
-            ->add('pays', CountryType::class,[
+                ->add('pays', CountryType::class,[
                 'label'=>'Pays',
                 'constraints'=> new Length([
                     'min'=>2,
                     'max'=>30
                 ]),
                 'attr'=>[
-                    'placeholder' =>'Merci de saisir votre prenom'
+                    'placeholder' =>'Merci de saisir votre pays'
                 ]
             ] )
 
 
             ->add('ville',TextType::class,[
-                'label'=>'Pays',
+                'label'=>'Ville',
                 'constraints'=> new Length([
                     'min'=>2,
                     'max'=>30
                 ]),
                 'attr'=>[
-                    'placeholder' =>'Merci de saisir votre prenom'
+                    'placeholder' =>'Merci de saisir votre ville'
                 ]
             ] )
 

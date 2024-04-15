@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+ {% block content %}
+
+
+ <div class="container">
+            <div class="row">
+
+                    <div class="col-md-6 my-auto">
+                                            <div class="col-md-12">
+                                            <h3>{{ produit_vba_detail.nomoutil | capitalize }}</h3>
+                                            <p>{{ produit_vba_detail.description | capitalize }}</p>
+
+
+                                          
+                                           
+
+         
+                                           
+
+                                            {% if produit_vba_detail.prix == 0 %}
+
+
+                                                          {% if app.session.has('email') %}
+                                                                  <!-- Si le prix du produit est 0 et l'utilisateur est connecté, afficher le lien de téléchargement -->
+                                                                  <a href="/uploads/{{ produit_vba_detail.PiecesJointes }}"><button type="button" class="btn btn-success">Télécharger</button></a>
+                                                        
+                                                          {% else %}
+                                                                  <!-- Si le prix du produit est 0 mais l'utilisateur n'est pas connecté, rediriger vers la page de connexion -->
+                                                                  <a href="{{ path('login') }}" class="btn btn-success">Télécharger</a>
+                                                          {% endif %}
+
+                                            {% elseif verif_id_vba_paye_finale == 1 %}
+                                                    <!-- Si le produit n'est pas gratuit et la vérification de paiement est valide, afficher le lien de téléchargement -->
+                                                    <a href="/uploads/{{ produit_vba_detail.PiecesJointes }}"><button type="button" class="btn btn-success">Télécharger</button></a>
+                                            {% else %}
+                                                    <!-- Si aucune des conditions précédentes n'est remplie, afficher le bouton "Ajouter au panier" -->
+                                                    <a href="{{ path('add_to_panier', {'id': produit_vba_detail.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+
+
+                                            {% endif %}
+
+
+                                       
+
+
+                                            {% if app.session.has('email') %}
+
+                              
+
+                                            <a href="/uploads/{{ produit_vba_detail.Documentation }}" class="btn btn-primary">Telecharger la documentation</a>       
+
+                                            {% else %}
+
+                                            <a href="{{path('login')}}" class="btn btn-primary">Telecharger la documentation</a>
+
+                                            {% endif %}
+
+                                        
+
+
+
+
+
+
+                                            </div>
+                    </div>
+
+                    <div class="col-md-6">
+                            
+                                <video width="640" height="360" controls>
+                                                                <source src="/uploads/{{ produit_vba_detail.video }}" type="video/mp4">
+                                                                Your browser does not support the video tag.
+                                                                </video>
+                    </div>
+
+            </div>
+
+
+
+
+</div>
+
+
+ {% endblock %}

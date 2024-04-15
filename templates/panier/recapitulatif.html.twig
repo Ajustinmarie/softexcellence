@@ -18,55 +18,97 @@
 
                                             <div>
                                                                    <!---->
-                                                                   <table class="table">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                
-                                                                                <th scope="col">Produit</th>
-                                                                                <th scope="col">Description</th>
-                                                                                <th scope="col">Quantite</th>
-                                                                                <th scope="col">Prix</th>
-                                                                                <th scope="col">total</th>
-                                                                               
-                                                                                </tr>
-                                                                            </thead>
-                                                                
-                                                                
-                                                                <tbody>                                                                        
-                                                                                    <tr>
-                                                                                            <th>
-                                                                                            <img src="images/business.jpg" alt="" height="75px"><br/>
-                                                                                            </th>
-                            
-                            
-                                                                                            <td>
-                                                                                                    rzgrgregergergergreg<br/>
-                                                                                                    <small>regregregregregregregergregreg</small> 
-                                                                                            </td> 
-                            
-                                                                                            <td>
+                                                                       <table class="table mt-3">
+                                                    <thead>
+                                                        <tr>
+                                                        
+                                                        <th scope="col">Produit</th>
+                                                        <th scope="col">Nom de l'article</th>
+                                                        <th scope="col">Quantite</th>
+                                                        <th scope="col">Prix</th>
+                                                        <th scope="col">total</th>
+                                                        <th scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% set total = null %}
+                                                        {% for article in cart %}
+
+                                                                        <tr>
+
+                                                                                                                    <th>
+                                                                                                                        <img src="{{ asset('assets/images/business.jpg')}}"" alt="" height="50px"><br/>
+                                                                                                                    </th>
+
+
+                                                                                                                <td>
+                                                                                                                        {{article.id}}<br/>
+                                                                                                                      <!--  <small>regregregregregregregergregreg</small>  -->
+                                                                                                                </td> 
+
+                                                                                                <td>
+                                                                                                
+                                                                                               x {{article.quantity}}
+                                                                                                
+                                                                                                </td>
+                                                                                                                
+
+                                                                                                                <td>{{article.id.Prix}} €</td>
+                                                                                                                <td> {{article.id.Prix * article.quantity}} € </td>
                                                                                                             
-                                                                                                    1
+                                                                                                                
                                                                                                             
-                                                                                            </td>
-                                                                                                                            
-                            
-                                                                                            <td>2344</td>
-                                                                                            <td>234 €</td>
-                                                                                                                        
-                                                                                                                            
-                                                                                           
-                                                                                
-                                                                                    </tr>                                                                     
-                
-                                                                    </tbody>
-                                                                      </table>
-                                                                   <!---->
+                                                                   
+                                                                        </tr> 
+                                                                        {% set total= total + ( article.id.Prix * article.quantity ) %}
+                                                        {% endfor %}                                   
+
+                                                  
+
+                                                    
+
+                                                    </tbody>
+
+                                                    
+                    </table>
+
+
+
+                      <div class="bloc_1">
+                                <div class="bloc_2">
+                                <b>Nombre d'articles :</b> {{ cart|length}} <br/>
+                                <b>Total de mon panier :</b> {{total}} €
+                                </div>
+
+                                <div class="bloc_3 mt-3" >
+                                        {% if app.session.get('email') %}
+
+                                     
+
+                                         <form action="{{path('app_payment')}}" method="post">                                                
+                                                    <input type="hidden" name="token" value="{{csrf_token('myform')}}">
+                                                    <input type="hidden" name="amount" value="{{total}}">
+                                              
+                                                    <button class="btn btn-success btn-block mt-1" style="width: 100%" >
+                                                    <span>Valider mon panier ( {{total}}€ )</span>
+                                                    </button>
+                                          </form> 
+                                    
+                                        {% else %}
+                                               
+                                               <!-- faire une redirection de page URGENT -->
+
+                                               
+                                               <a href="{{path('espace_login_nouveau')}}" class="btn btn-success btn-block mt-1" style="width: 400px" >Valider mon panier</a>
+
+                                      {% endif %}
+                             
+                                </div>
+                    </div>
+                                                                  
                                             </div>
 
-                                            <div>
-                                                <a href="recapitulatif.html" class="btn btn-success btn-block mt-1" style="width: 100%" >Payer ma commande</a>
-                                            </div>
+                                          
        
             </div>   
                     

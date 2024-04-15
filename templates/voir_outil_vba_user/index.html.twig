@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+    
+           {% block content %}
+
+            <div class="container">
+
+     {% if app.session.get('email') %}    
+
+     
+        <h3>Bienvenue {{app.session.get('prenom')}}</h3>
+        <h6><a href="{{path('voir_outil_vba_user')}}">Mes outils</a></h6><br/>   
+    {% endif %} 
+            
+           <div class="row row-cols-1 row-cols-md-3 g-4">  
+
+
+
+   {% for produit_vba in produit_vba %}                   
+         
+
+                        <div class="col">
+
+
+
+                        <div class="card h-100">
+                            <img src="{{ asset('assets/images/business.jpg') }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ produit_vba.nom_outil }}</h5>
+                                <p class="card-text">{{ produit_vba.description | slice(0, 100) ~ '...' }}</p>                    
+                            </div>
+                            <div class="card-footer">      
+
+
+                                <a href=" {{path('outils_qhse_vba_detail',{'id':produit_vba.id})}}" class="btn btn-primary">Voir détails</a>
+
+
+                                <small class="text-body-secondary">
+
+                              
+                         
+
+                               
+                               <a href="/uploads/{{ produit_vba.pieces_jointes }}"><button type="button" class="btn btn-success"> Télécharger </button> </a> 
+                              
+
+                                
+                                
+                                
+                                </small>                    
+                            </div>
+                        </div> 
+
+
+
+                                        
+                                </div>
+   
+      
+
+{% endfor %}
+
+
+
+         {% endblock %}

@@ -12,10 +12,12 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Constraints\Length;
 
 class PassModificationType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -80,40 +82,46 @@ class PassModificationType extends AbstractType
         ]
 
         ])
-             
+           /*  
             ->add('numero',TextType::class,[
                 'label'=>'Numero',
-            
+                'disabled'=>true,
                 'required' => false,
             ] )
 
 
             ->add('adresse',TextType::class,[
                 'label'=>'Adresse',
+                'disabled'=>true,
             ] )
 
             
             ->add('complement_adresse',TextType::class,[
                 'label'=>'Complément d\'adresse',
+                'disabled'=>true,
                
             ] )
 
         ->add('pays', CountryType::class,[
             'label'=>'Pays',
+            'disabled'=>true,
             'constraints'=> new Length([
                 'min'=>2,
                 'max'=>30
             ]),
+            'data' => 'France',
         ] )
 
 
         ->add('ville',TextType::class,[
-            'label'=>'Pays',
+            'label'=>'Ville',
+            'disabled'=>true,
             'constraints'=> new Length([
                 'min'=>2,
                 'max'=>30
             ]),
         ] )
+        */
 
 
         ->add('submit', SubmitType::class,

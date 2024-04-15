@@ -70,6 +70,21 @@ class User implements UserInterface
      */
     private $pays;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $Statut;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Situation;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $token_user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -166,10 +181,6 @@ class User implements UserInterface
     }
 
 
-
-
-
-
     public function getPrenom(): ?string
     {
         return $this->prenom;
@@ -238,6 +249,42 @@ class User implements UserInterface
     public function setPays(string $pays): self
     {
         $this->pays = $pays;
+
+        return $this;
+    }
+
+    public function getStatut(): ?bool
+    {
+        return $this->Statut;
+    }
+
+    public function setStatut(?bool $Statut): self
+    {
+        $this->Statut = $Statut;
+
+        return $this;
+    }
+
+    public function getSituation(): ?string
+    {
+        return $this->Situation;
+    }
+
+    public function setSituation(?string $Situation): self
+    {
+        $this->Situation = $Situation;
+
+        return $this;
+    }
+
+    public function getTokenUser(): ?string
+    {
+        return $this->token_user;
+    }
+
+    public function setTokenUser(string $token_user): self
+    {
+        $this->token_user = $token_user;
 
         return $this;
     }

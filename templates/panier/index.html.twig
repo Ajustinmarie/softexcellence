@@ -10,14 +10,14 @@
 
                 <h3>Mon panier</h3>
                 Retrouvez l'ensemble des outils que vous avez ajouté à votre panier.
-                <hr/>
-
-                <table class="table">
+             
+                {% if cart|length > 0  %}
+                <table class="table mt-3">
                                                     <thead>
                                                         <tr>
                                                         
                                                         <th scope="col">Produit</th>
-                                                        <th scope="col">Description</th>
+                                                        <th scope="col">Nom de l'article</th>
                                                         <th scope="col">Quantite</th>
                                                         <th scope="col">Prix</th>
                                                         <th scope="col">total</th>
@@ -25,38 +25,41 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                 
-                                                        
-                                                        <tr>
+                                                        {% set total = null %}
+                                                        {% for article in cart %}
 
-                                                                                                    <th>
-                                                                                                        <img src="images/business.jpg" alt="" height="75px"><br/>
-                                                                                                    </th>
+                                                                        <tr>
 
+                                                                                                                    <th>
+                                                                                                                        <img src="{{ asset('assets/images/business.jpg')}}"" alt="" height="50px"><br/>
+                                                                                                                    </th>
+
+
+                                                                                                                <td>
+                                                                                                                        {{article.id}}<br/>
+                                                                                                                      <!--  <small>regregregregregregregergregreg</small>  -->
+                                                                                                                </td> 
 
                                                                                                 <td>
-                                                                                                        rzgrgregergergergreg<br/>
-                                                                                                        <small>regregregregregregregergregreg</small> 
-                                                                                                </td> 
-
-                                                                                <td>
-                                                                                   
-                                                                                   1
-                                                                                  
-                                                                                </td>
                                                                                                 
-
-                                                                                                <td>2344</td>
-                                                                                                <td>234 €</td>
-                                                                                               
+                                                                                               x {{article.quantity}}
                                                                                                 
-                                                                                                <td>                                   
-                                                                                                <a href="#">
-                                                                                                <img src="images/poubelle.png" height="20px" alt="supprimer mon produt">
-                                                                                                </a>
                                                                                                 </td>
-                                                    
-                                                        </tr>                                      
+                                                                                                                
+
+                                                                                                                <td>{{article.id.Prix}} €</td>
+                                                                                                                <td> {{article.id.Prix * article.quantity}} € </td>
+                                                                                                            
+                                                                                                                
+                                                                                                                <td>                                   
+                                                                                                                 <a href="{{path('delete_to_cart',{'id': article.id.id} )}}">
+                                                                                                                <img src="{{ asset('assets/images/poubelle.png') }}" height="20px" alt="supprimer mon produt">
+                                                                                                                 </a>
+                                                                                                                </td>
+                                                                   
+                                                                        </tr> 
+                                                                        {% set total= total + ( article.id.Prix * article.quantity ) %}
+                                                        {% endfor %}                                   
 
                                                   
 
@@ -69,17 +72,32 @@
 
                     <div class="bloc_1">
                                 <div class="bloc_2">
-                                <b>Nombre de produit :</b> 2<br/>
-                                <b>Total de mon panier :</b> 123 €
+                                <b>Nombre d'articles :</b> {{ cart|length}} <br/>
+                                <b>Total de mon panier :</b> {{total}} €
                                 </div>
 
                                 <div class="bloc_3 mt-3" >
-                                <a href="{{path('recapitulatif_panier')}}" class="btn btn-success btn-block mt-1" style="width: 100%" >Valider mon panier</a>
+                                        {% if app.session.get('email') %}
+
+                                            <a href="{{path('recapitulatif_panier')}}" class="btn btn-success btn-block mt-1" style="width: 100%" >Valider mon panier</a>
+                                    
+                                        {% else %}
+
+                                               <a href="{{path('espace_login_nouveau')}}" class="btn btn-success btn-block mt-1" style="width: 100%" >Valider mon panier</a>
+
+                                      {% endif %}
+                             
                                 </div>
                     </div>
            
             </div>
      
+            {% else %}
 
+            <hr>
+            <p><b>Votre panier est vide.</b></p>
+
+
+            {% endif %}
 
              {% endblock %}

@@ -64,6 +64,47 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+
+    /******************VERIFICATION EMAIL *******************************************/
+    public function verifemail($email, $password_crypter): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * FROM user WHERE email='$email' AND password='$password_crypter' limit 1" ;
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+
+     /******************ACTIVATION COMPTE *******************************************/
+     public function compte_activation($token_user): array
+     {
+         $conn = $this->getEntityManager()->getConnection();
+         $sql = "UPDATE user SET 
+                    statut=1                   
+                    WHERE token_user='$token_user'";    
+         $stmt = $conn->prepare($sql);
+         $resultSet = $stmt->executeQuery();
+         // returns an array of arrays (i.e. a raw data set)
+         return $resultSet->fetchAllAssociative();
+     }
+
+
+
+        /******************Modification password finale*******************************************/
+        public function modif_password($password_finale, $id_user): array
+        {
+                $conn = $this->getEntityManager()->getConnection();
+                $sql = "UPDATE user SET 
+                        password='$password_finale'                   
+                        WHERE id='$id_user'";    
+                $stmt = $conn->prepare($sql);
+                $resultSet = $stmt->executeQuery();
+                // returns an array of arrays (i.e. a raw data set)
+                return $resultSet->fetchAllAssociative();
+        }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
